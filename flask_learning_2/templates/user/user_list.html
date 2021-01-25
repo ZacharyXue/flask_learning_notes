@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+{% block container %}
+<strong>
+    Users' List
+</strong>
+<form  method="POST">
+    <label for="search">search</label>
+    <select name="field" id="">
+        <option value="id">id</option>
+        <option value="username">username</option>
+    </select>
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+</form>
+<!-- <table>
+    <tr>
+        <td>
+            总页数:{{ pages }} / 总记录：{{ total }}
+        </td>
+    </tr>
+</table> -->
+<table >
+    <tr>
+        <th>id</th><th>username</th>
+    </tr>
+    {% for user in users%}
+    <tr>
+        <td>
+            {{user.id}}
+        </td>
+        <td>
+            {{user.username}}
+        </td>
+        <td>
+            <a href="{{url_for('user_app.deleteUser',user_id=user.id)}}">delete</a>
+            <a href="{{url_for('user_app.editUser',user_id=user.id)}}">edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- <ul type=None>
+{% for page in pageList %}
+    {% if page != None %}
+        <li>
+            <a href="?page={{ page }}">{{ page }}</a>
+        </li>
+    {% else %}
+        <li>
+            <a href="#">...</a>
+        </li>
+    {% endif %}
+{% endfor %}
+</ul> -->
+{% endblock%}

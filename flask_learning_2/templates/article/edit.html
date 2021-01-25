@@ -1,0 +1,28 @@
+{% extends "index.html" %}
+{% block container %}
+<h1>
+    edit the article
+</h1>
+<!-- 好多次忘记将form 的 method方法改为post，使得网页发送get方法而我视图函数却接受不到 -->
+<form action="" method="POST">
+    <label for="title">title</label>
+    <input type="text" name="title" value="{{article.title}}"><br>
+    <label for="content">content</label><br>
+    <textarea name="content" row="30" cols="30" >{{article.content}}</textarea><br>
+    <label for="category">category</label>
+    <select name="category" id="">
+        {% for category in categorys %}
+            <option value="{{category.id}}"
+                {% if article.category_id == category.id%}
+                    selected
+                {% endif %}
+            >{{category.name}}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" name="submit" value="submit">
+</form>
+<script type="text/JavaScript" src="{{url_for('static',filename='ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('content')
+</script>
+{% endblock %}

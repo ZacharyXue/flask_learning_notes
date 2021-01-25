@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block container %}
+<strong>
+    Category
+</strong>
+<a href="/article/add_category">add</a>
+<form  method="POST">
+    <label for="search">search</label>
+    <input type="text" name="name">
+    <input type="submit" value="submit">
+</form>
+
+<table >
+    <tr>
+        <th>id</th><th>name</th><th>order</th>
+    </tr>
+    {% for category in categorys%}
+    <tr>
+        <td>
+            {{category.id}}
+        </td>
+        <td>
+            {{category.name}}
+        </td>
+        <td>
+            {{category.order}}
+        </td>
+        <td>
+            {% if username %}
+            <a href="{{url_for('article_app.deleteCategory',id=category.id)}}">delete</a>
+            <a href="{{url_for('article_app.editCategory',id=category.id)}}">edit</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock%}

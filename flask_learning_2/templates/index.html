@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- css、image、JavaScript等均放于static文件夹下 -->
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}"/>
+		<title></title>
+	</head>
+	<body>
+		<div class="header">
+			<p>A website</p>
+			<ul>
+				<li><a href="/">homepage</a></li>
+				<!-- 限制登录后才显示相关目录 -->
+				{% if username %}
+				<li><a href="/user/list">usersList</a></li>
+				{% endif %}
+				<li><a href="/article/list">articles</a></li>
+				<li><a href="/article/category">categorys</a></li>
+				<li>
+					<a href="" id="navigaton">navigation</a>
+					<!-- 因为自己一开始并没有想比较复杂的页面，所有没有设置id和class，
+					导致后来要实现二级目录时很费劲 -->
+					<ul>
+						{% for category in categorys %}
+						<li>
+							<a href="{{url_for('article_app.articleListByCategory',category_id=category.id)}}">{{category.name}}</a>	
+						</li>
+						{% endfor %}
+					</ul>
+
+				</li>
+				{% if not username %}
+				<li class='user nav'>
+					<a href="/user/register">register</a>
+				</li>
+				<li class='user nav'>
+					<a href="/user/login">login</a>
+				</li>
+				{% else %}
+				<li class='user nav'>
+					<a href="">logout</a>
+				</li>
+				<li class='user nav'>
+					<a href="">{{username}}</a>
+				</li>
+				{% endif %}
+			</ul>
+		</div>
+		
+		<div class="container">
+			{% block container %}
+			<p>Hello</p>
+			<p>Is it right?</p>
+			<p>Maybe</p>
+			{% endblock %}
+		</div>
+		
+	</body>
+</html>

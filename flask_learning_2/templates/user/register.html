@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block container %}
+<h2>
+    register
+</h2>
+<p>
+    {{message}}
+</p>
+<form action="" method="POST">
+    <label for="name">username</label>
+    <input type="text" name="name" ><br>
+    <label for="password">password</label>
+    <input type="password" name="password"><br>
+    <input type="submit" value="submit">
+</form>
+{% endblock%}

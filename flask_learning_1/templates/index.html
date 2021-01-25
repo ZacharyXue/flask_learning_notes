@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <!-- 使用模板语言block来实现大部分网页避免大部分重复性编程 -->
+    {% block head %}
+    <head>
+        <style>
+            div>h3{
+                color: red;
+            }
+        </style>
+    </head>
+    {% endblock %}
+    {% block content%}
+    <body>
+        <div>
+            {% for news in newsList%}
+            <h3>{{news['title']}}</h3>
+            {{news['intro']}}
+            {% endfor %}
+        </div>
+    </body>
+    {% endblock %}
+</html>

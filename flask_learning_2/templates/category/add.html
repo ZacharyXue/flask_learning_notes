@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block container %}
+<h2>
+    user's category
+</h2>
+<p>
+    {{message}}
+</p>
+<form action="" method="POST">
+    <label for="name">name</label>
+    <input type="text" name="name" ><br>
+    <label for="order">order</label>
+    <input type="text" name="order"><br>
+    <input type="submit" value="submit">
+</form>
+{% endblock %}

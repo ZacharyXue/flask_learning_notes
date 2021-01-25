@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block content%}
+<table>
+    <tr>
+        <th>username</th>
+    </tr>
+    <!-- 注意模板语言for的使用，也要记住后面一定要end -->
+    {% for user in users%}  
+    <tr>
+        <td>
+            {{user.username}}
+        </td>
+        <td>
+            <a href="{{url_for('deleteUser',user_id=user.id)}}">delete</a>
+            <a href="{{url_for('editUser',user_id=user.id)}}">edit</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock%}

@@ -1,0 +1,11 @@
+{% extends "index.html" %}
+{% block container %}
+<h2>
+    edit user's information
+</h2>
+<form action="" method="POST">
+    <label for="name">username</label>
+    <input type="text" name="name" value="{{user.username}}">
+    <input type="submit" value="submit">
+</form>
+{% endblock%}

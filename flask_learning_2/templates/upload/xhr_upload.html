@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% block container %}
+<!-- 进度条 -->
+<progress max="10" value="0" id="progress"></progress>
+<!-- 设置空的div都是为后面使用JavaScript控制显示 -->
+<div id="message"></div>
+<div id="image"></div>
+<div class="form-group">
+    <label for="picname">picture name</label>
+    <input type="text" name="picname" class="form-control">
+</div>
+<div class="form-group">
+    <!-- 设置multiple可以一次上传多个文件 -->
+    <input type="file" name="file" id="file" class="form-control"
+        multiple="multiple">
+    <input type="button" name="btn" value="upload" class="btn ">
+</div>
+
+<script>
+    progress = document.getElementById("progress")
+    message = document.getElementById("message")
+    image = document.getElementById("image")
+    btn = document.querySelector(".btn")
+    xhr = new XMLHttpRequest()
+    xhr.upload.onloadstart = function(ev){
+        message.innerHTML = 'start uploading'
+    }
+    xhr.upload.onprogress = function(ev){
+        progress.value = ev.loaded / ev.total * 100
+    }
+    xhr.onreadystatechange = function(){
+        if (this.readyState==4 && this.status==200){
+            data = JSON.parse(this.responseText)
+            if (data.result=="success"){
+                message.innerHTML == "upload successed"
+                for (i in data.filepath_list){
+                    img = document.createElement("img")
+                    img.src = data.filepath_list[i]
+                    image.appendChild(img)
+                }
+            }else{
+                message.innerHTML = "upload failed" + data.error
+            }
+        } 
+    }
+    btn.onclick = function(){
+        files = document.getElementById("file").files
+        data = new FormData()
+        for (i in files){
+            data.append("file",files[i])
+        }
+        xhr.open("post","/upload/")
+        xhr.send(data)
+    }
+</script>
+{% endblock%}

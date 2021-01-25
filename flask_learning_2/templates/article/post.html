@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+{% block container %}
+<h1>write article</h1>
+<form action="" method="POST">
+    <label for="title">title</label>
+    <input type="text" name="title"><br>
+    <label for="content">content</label><br>
+    <textarea name="content" rows="30" rols="30"></textarea><br>
+    <label for="category">category</label>
+    <select name="category" id="">
+        {% for category in categorys %}
+            <option value="{{category.id}}">{{category.name}}</option>
+        {% endfor %}
+    </select><br>
+    <input type="submit" name="submit" value="submit">
+</form>
+<!-- 将textarea替换为ckeditor -->
+<script type="text/JavaScript" src="{{url_for('static',filename='ckeditor/ckeditor.js')}}"></script>
+<script>
+    CKEDITOR.replace('content',{
+        filebrowserUploadUrl:'/upload/ckeditor'
+    })
+</script>
+{% endblock %}
