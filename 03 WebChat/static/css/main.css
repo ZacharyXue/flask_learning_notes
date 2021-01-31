@@ -1,0 +1,50 @@
+.container{
+	width: 1000px;
+	height: 600px;
+}
+.container div{
+	margin: 2.5%;
+}
+
+.main{
+	width: 65%;
+	height: 75%;
+	float: left;
+}
+
+#message{
+	color: red;
+}
+.main .login#message{
+	position: relative;
+	left: 10%;
+	width: 30%;
+}
+
+
+.chat{
+	height: 90%;
+	overflow-y: scroll;
+}
+
+.chat a{
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.user_bar{
+	width: 24%;
+	height: 70%;
+	float: left;	
+}
+.user_list{
+	height: 90%;
+	overflow-y: scroll;
+}
+
+.talk_bar{
+	width: 80%;
+	height: 20%;
+	float: left;
+}

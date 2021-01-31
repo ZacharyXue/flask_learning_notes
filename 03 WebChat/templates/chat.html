@@ -1,0 +1,70 @@
+{% extends 'index.html'%}
+{% block main %}
+<h3>聊天内容</h3>
+<a href="/logout">logout</a>
+<div class="chat" id="chat"></div>
+{% endblock%}
+
+{% block user %}
+<h3>在线用户</h3>
+<div class="user_list" id="user_list">
+	<form action="" method="post" id="user_form">
+
+	</form>
+</div>
+{% endblock %}
+		
+{% block talk %}
+
+对 &nbsp;<input type="text" name="listener" id="listener" value="who" style="width: 70px;"/>说:<br>
+<textarea rows="2" cols="60" id="text" name="text">text</textarea><br>
+<input type="submit" id="btn" name="" value="send" />
+
+<script>
+	chat = document.getElementById('chat')
+	user_list = document.getElementById('user_form')
+	text = document.getElementById('text')
+	btn = document.getElementById('btn')
+	listener = document.getElementById('listener')
+
+	var users = []
+
+	xhr = new XMLHttpRequest()
+	xhr.onreadystatechange = function(ev){
+		if (this.readyState==4 && this.status==200){
+			data = JSON.parse(this.responseText)
+			for(i in data.messages){
+				chat.innerHTML += '<a href="">'+ data.messages[i].speaker +'</a>' + ' to ' + data.messages[i].listener + ' ' + data.messages[i].date
+				chat.innerHTML += '<p>' + data.messages[i].text + '</p>'
+			}
+			chat.scrollTop = chat.scrollHeight
+			user_list.innerHTML = ''
+			for(i in data.users){
+				user_list.innerHTML += '<input type="radio" name="username" id="user_radio" value="'+ data.users[i] +'" onclick="radioValue(this)"/>' + data.users[i] + '<br>'
+			}
+		}
+	}
+
+	btn.onclick = function(){
+		data = new FormData()
+		data['text'] = text.value
+		data['listener'] = listener.value
+		data_sent = JSON.stringify(data)
+		xhr.open("post","{{url_for('chat')}}",true)
+		xhr.send(data_sent)
+	}
+	
+	window.setInterval(function(){
+		data = new FormData()
+		data['text'] = ''
+		data['listener'] = ''
+		data_sent = JSON.stringify(data)
+		xhr.open("post","{{url_for('chat')}}",true)
+		xhr.send(data_sent)
+	},5000)
+
+	function radioValue(obj){
+		listener.value = obj.value
+	}
+</script>
+{% endblock %}

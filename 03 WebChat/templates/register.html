@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% block main %}
+	<h3>注册</h3>
+	<p class="register" id="message">{{ message }}</p>
+	{% if message=='' %}
+		<form action="" method="post">
+			{% for field in form %}
+				{% if field.widget.input_type!="hidden" %}
+					{{ field.label }}
+					{{ field }} <br>
+				{% else %}
+					{{ field }}
+				{% endif%}
+			{% endfor %}
+		</form>
+	{% else %}
+		<a href="/register">back to register</a>
+	{% endif%}
+{% endblock%}
+{% block talk%}
+		<a href="/">login</a>
+{% endblock%}
