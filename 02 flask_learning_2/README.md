@@ -162,7 +162,7 @@ def login_required(func):
 在文章书写和编辑中使用 `ckeditor`代替HTML原生的 `textarea`，格式见`user`相应的HTML文件。
 
 # 需要继续学习的地方
- - [ ] `libs.py`中装饰器使用的`wraps`
+ - [x] `libs.py`中装饰器使用的`wraps`
  - [ ] `upload.py`中的`ckeditor`上传文件出现`500`
  - [ ] **Javascript不太懂……**
- - [ ] 文件传输中json和ajax相关
+ - [x] 文件传输中json和ajax相关
