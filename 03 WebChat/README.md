@@ -22,11 +22,11 @@
 
 ## flask-wtf插件
 
-flask-wtf插件可以让flask获得更多表单的控制能力，在 `app.py`中的 [`login()`](app.py#16)和[`register()`](app.py#52)都有用到。
+flask-wtf插件可以让flask获得更多表单的控制能力，在 `app.py`中的 [`login()`](app.py#L16)和[`register()`](app.py#L52)都有用到。
 
 ### 编写form表单
 
-我将所有表单都编写到 [`libs.py`](libs.py#23)的表单类中，其中编写形式类似于：
+我将所有表单都编写到 [`libs.py`](libs.py#L23)的表单类中，其中编写形式类似于：
 ```Python
 password = PasswordField('password',validators=[DataRequired(message='You have to input password')])
 submit = SubmitField('',render_kw={'value':'submit'})
@@ -55,7 +55,7 @@ submit = SubmitField('',render_kw={'value':'submit'})
 
 ### 后端接受数据
 
-在 [`app.py`](app.py#16) 中进行了表单数据的接受，其中
+在 [`app.py`](app.py#L16) 中进行了表单数据的接受，其中
 
  - `form = loginForm()`对于表单对象进行了初始化
  - `if form.validate_on_submit():`会在后端对于数据进行验证
@@ -91,7 +91,7 @@ submit = SubmitField('',render_kw={'value':'submit'})
 - `json.dumps()`将对象转换为字符串
 - `json.loads()`将字符串转换为Python类型
 
-在[`app.py`](app.py#78)的`chat`函数中对于json进行了简单应用，其中:
+在[`app.py`](app.py#L78)的`chat`函数中对于json进行了简单应用，其中:
 - `response = json.loads(request.data)`对前端数据转换为Python相关数据格式
 - `return json.dumps(all_messages)`最后将python字典转换为字符串进行传递
 
@@ -133,7 +133,7 @@ xhr.onreadystatechange = function(ev){
 
 对于细节部分还是没有很细的了解，但是通过[官方实例](https://docs.python.org/2/library/functools.html#functools.wraps)大概知道了相关的功能。
 
-将试图[保护装饰器函数](libs.py#12)粘贴下来做解释：
+将试图[保护装饰器函数](libs.py#L12)粘贴下来做解释：
 ```Python
 def login_required(func):
     @wraps(func)
