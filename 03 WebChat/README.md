@@ -133,7 +133,7 @@ xhr.onreadystatechange = function(ev){
 
 对于细节部分还是没有很细的了解，但是通过[官方实例](https://docs.python.org/2/library/functools.html#functools.wraps)大概知道了相关的功能。
 
-将试图[保护装饰器函数](libs.py#L12)粘贴下来做解释：
+将[视图保护装饰器函数](libs.py#L12)粘贴下来做解释：
 ```Python
 def login_required(func):
     @wraps(func)
